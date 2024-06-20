@@ -6,6 +6,7 @@ type CartItem = {
   id: number;
   product?: any;
   price: number;
+  productId: number;
   stockQuantity: number;
   // Add other relevant fields
 };

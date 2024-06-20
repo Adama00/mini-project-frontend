@@ -8,6 +8,8 @@ type Product = {
   price: number;
   categoryId: number;
   regionId: number;
+  stockQuantity: number;
+  description: string;
   // Add other relevant fields
 };
 

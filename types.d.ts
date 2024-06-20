@@ -32,7 +32,7 @@ type createproduct = {
     id: number, 
     productId: number,
     quantity?: number,
-    product: {
+    product?: {
       id: number,
       name: string,
       description: string,

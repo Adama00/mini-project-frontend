@@ -6,8 +6,10 @@ type ProductType = {
   id: number;
   name: string;
   price: number;
+  description: string;
   categoryId: number;
   regionId: number;
+  stockQuantity: number;
   // Add other relevant fields
 };
 
