@@ -29,7 +29,7 @@ type createproduct = {
   }
 
   type cartitem = {
-    id: number,
+    id: number, 
     productId: number,
     quantity?: number,
     product: {
