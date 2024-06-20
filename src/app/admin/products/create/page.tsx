@@ -4,9 +4,10 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRouter } from "next/navigation";
 
 let addproducts = async (body : createproduct) => {
-  let res = await fetch("http://adamasenam-001-site1.ctempurl.com/api/Products", {
+  let res = await fetch("https://localhost:7104/api/Products", {
     method: "POST",
     headers: {
+      'Authorization': 'Basic ' + btoa(`11182204:60-dayfreetrial`),
       "Content-Type": "application/json",
       Accept: "application/json",
     },
@@ -23,7 +24,7 @@ let addproducts = async (body : createproduct) => {
 };
 
 const page =() => {
-  const router = useRouter()
+  // const router = useRouter()
   
   return (
     <main>
@@ -31,7 +32,7 @@ const page =() => {
         <p className="text-center">Add Products In Store</p>
       </div>
       <Formik
-        initialValues ={{ name: "", price: 0,description: "",regions_id: 0, quantity: 0,categories_id: 0}}
+        initialValues ={{ name: "", price: 0,description: "",regionId: 0, stockQuantity: 0,categoryId: 0}}
         validate={(values) => {
           const errors:producterrors  = {};
           if (!values.name) {
@@ -40,17 +41,17 @@ const page =() => {
           if (!values.description) {
             errors.description = "Required";
           }
-          if (values.quantity<=0) {
-            errors.quantity = "Quantity Must be reater than 0";
+          if (values.stockQuantity<=0) {
+            errors.stockQuantity = "Quantity Must be reater than 0";
           }
           if (values.price<=0) {
             errors.price = "Price Must be reater than 0";
           }
-          if (values.categories_id<=0) {
-            errors.categories_id = "Please select a cateory";
+          if (values.categoryId<=0) {
+            errors.categoryId = "Please select a category";
           }
-          if (values.regions_id<=0) {
-            errors.region = "Please select a region";
+          if (values.regionId<=0) {
+            errors.regionId = "Please select a region";
           }
           return errors;
         }}
@@ -59,7 +60,7 @@ const page =() => {
           addproducts(data)
           setSubmitting(false);
           alert("Product Added Successfully")
-          router.push('/admin/products')
+          // router.push('/admin/products')
         }}
       >
         {({ isSubmitting }) => (
@@ -86,21 +87,21 @@ const page =() => {
             </div>
 
             <div className="flex flex-col gap-2 mb-6">
-              <label htmlFor="quantity">Product Quantity</label>
-              <Field className="border-[1px] outline-none border-gray-400 p-2 focus:border-primary" type="number" name="quantity" />
-              <ErrorMessage name="quantity" component="small" className="text-red-400"/>
+              <label htmlFor="stockQuantity">Product Quantity</label>
+              <Field className="border-[1px] outline-none border-gray-400 p-2 focus:border-primary" type="number" name="stockQuantity" />
+              <ErrorMessage name="stockQuantity" component="small" className="text-red-400"/>
             </div>
 
             <div className="flex flex-col gap-2 mb-6">
-              <label htmlFor="categories_id">Cateory</label>
-              <Field className="border-[1px] outline-none border-gray-400 p-2 focus:border-primary" type="number" name="categories_id" />
-              <ErrorMessage name="categories_id" component="small" className="text-red-400"/>
+              <label htmlFor="categoryId">Category</label>
+              <Field className="border-[1px] outline-none border-gray-400 p-2 focus:border-primary" type="number" name="categoryId" />
+              <ErrorMessage name="categoryId" component="small" className="text-red-400"/>
             </div>
 
             <div className="flex flex-col gap-2 mb-6">
-              <label htmlFor="regions_id">Region</label>
-              <Field className="border-[1px] outline-none border-gray-400 p-2 focus:border-primary" type="number" name="regions_id" />
-              <ErrorMessage name="regions_id" component="small" className="text-red-400"/>
+              <label htmlFor="regionId">Region</label>
+              <Field className="border-[1px] outline-none border-gray-400 p-2 focus:border-primary" type="number" name="regionId" />
+              <ErrorMessage name="regionId" component="small" className="text-red-400"/>
             </div>
 
             <button className={` text-white p-2 px-4 text-sm rounded-lg relative left-1/2 -translate-x-1/2 ${isSubmitting? "bg-gray-": "bg-primary"}`}  type="submit" disabled={isSubmitting}>

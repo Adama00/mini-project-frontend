@@ -3,11 +3,12 @@ import React from "react";
 import Productcounter from "./Productcounter";
 
 const addtocart = async () => {
-  let res = await fetch("http://adamasenam-001-site1.ctempurl.com/api/cart", {
-    cache: "no-store",
-  });
+  let res = await fetch("https://localhost:7104/api/Cart",{cache : "no-store", headers: {
+    'Authorization': 'Basic ' + btoa(`11182204:60-dayfreetrial`)
+  }});
 
   if (!res.ok) {
+    
     return undefined;
   }
 

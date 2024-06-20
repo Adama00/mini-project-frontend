@@ -4,14 +4,20 @@ import React from 'react'
 
 //Fetching data or all products here
 const getproduct = async (id:number) =>{
-  let res = await fetch(`http://adamasenam-001-site1.ctempurl.com/api/products/${id}`)
+  let res = await fetch(`https://localhost:7104/api/Products/${id}`,
+    {
+      headers: {
+        'Authorization': 'Basic ' + btoa(`11182204:60-dayfreetrial`)
+      }
+    }
+  )
 
   if(!(res.ok)){
     return undefined
   }
   
   let data = await res.json()
-  return data
+  return data.data
 }
 
 

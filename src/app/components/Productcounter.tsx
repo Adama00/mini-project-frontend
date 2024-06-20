@@ -1,8 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa6";
 
 const Productcounter = ({ id }: { id: number }) => {
+  const router = useRouter()
   const [count, setcount] = useState(1);
 
   const addcount = () => {
@@ -21,12 +23,13 @@ const Productcounter = ({ id }: { id: number }) => {
     }
   };
 
-  const addtocart = async (body: { products_id: number; quantity: number }) => {
-    let res = await fetch("http://adamasenam-001-site1.ctempurl.com/api/cart", {
+  const addtocart = async (body: { productId: number; stockQuantity: number }) => {
+    let res = await fetch("https://localhost:7104/api/Cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        'Authorization': 'Basic ' + btoa(`11182204:60-dayfreetrial`)
       },
       body: JSON.stringify(body),
     });
@@ -41,9 +44,10 @@ const Productcounter = ({ id }: { id: number }) => {
   const submitform = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // alert("id "+id+"count "+count)
-    addtocart({ products_id: id, quantity: count });
+    addtocart({ productId: id, stockQuantity: count });
     setcount(1);
     alert("Product Added To Cart");
+    router.refresh()
   };
 
   return (
